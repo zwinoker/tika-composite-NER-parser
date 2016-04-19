@@ -66,7 +66,13 @@ public class CompositeNERAgreementParser implements Parser
 			// Combine results and add to metadata.
 			Map<String, Map<String,Integer>> combo = combineResults();
 			String json = mapToJSON(combo);
-			pushToMetadata("entities",json);
+			String openNLPJSON = mapToJSON(this.openNLPEntities);
+			String coreNLPJSON = mapToJSON(this.coreNLPEntities);
+			String nltkJSON = mapToJSON(this.nltkEntities);
+			pushToMetadata("openNLP entities", openNLPJSON);
+			pushToMetadata("coreNLP entities", coreNLPJSON);
+			pushToMetadata("nltk entities", nltkJSON);
+			pushToMetadata("maxJointAgreement",json);
 			pushToMetadata("quantities", this.gQMeasurements);
 		
 		} catch (Exception e) {
