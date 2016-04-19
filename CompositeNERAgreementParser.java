@@ -100,6 +100,7 @@ public class CompositeNERAgreementParser implements Parser
 	private Map<String, Map<String,Integer>>  nltkParse(String text) {
 		Map<String, Map<String,Integer>> result = new HashMap<>();
 		try {
+			// Connect to the NLTK REST server
 			URLConnection connection = new URL(this.nltkServerURL).openConnection();
 			connection.setDoOutput(true);
 			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
