@@ -71,23 +71,23 @@ public class CompositeNERAgreementParser implements Parser
 		
 		} catch (Exception e) {
 				e.printStackTrace();
-			}
+		}
 	}
 
 	// Each OpenNLP parser can only find one type of named entities. This method parses data for each type and returns
 	// 	the aggregated results.
 	private Map<String, Map<String,Integer>> openNLPParse(String text) {
-		Map<String, Map<String,Integer>> total = new HashMap<String, Map<String,Integer>>();
+		Map<String, Map<String,Integer>> result = new HashMap<String, Map<String,Integer>>();
 		String path = "";
 		
 		for (String type : this.entityTypes) {
 			path = "en-ner-" + type.toLowerCase() + ".bin";
 			this.nlp = new OpenNLPNameFinder(type, path);
 			Map<String,Integer> entities = nlp.recogniseWithCounts(text);
-			total.put(type, entities);
+			result.put(type, entities);
 		}
 
-		return total;
+		return result;
 	}
 
 	// Stanford coreNLP parser
@@ -98,11 +98,9 @@ public class CompositeNERAgreementParser implements Parser
 
 	// NLTK parsing
 	private Map<String, Map<String,Integer>>  nltkParse(String text) {
-		Map<String, Map<String,Integer>> total = new HashMap<>();
+		Map<String, Map<String,Integer>> result = new HashMap<>();
 		try {
-			// String nltkServerURL = "http://127.0.0.1:8888/nltk";
 			URLConnection connection = new URL(this.nltkServerURL).openConnection();
-			// connection.setRequestMethod("POST"); 
 			connection.setDoOutput(true);
 			OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
 
@@ -112,17 +110,13 @@ public class CompositeNERAgreementParser implements Parser
 			InputStream response = connection.getInputStream();
 
        	 	String inputStreamString = new Scanner(response,"UTF-8").useDelimiter("\\A").next();
-       	 	// total = jsonToMap(inputStreamString);
-       	 	total = openNLPParse(inputStreamString);
-       	 	// total = coreNLPParse(inputStreamString);
-
-			// System.out.println(inputStreamString);
+       	 	result = openNLPParse(inputStreamString);
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return total;
+		return result;
 	}
 
 
