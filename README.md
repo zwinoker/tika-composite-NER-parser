@@ -5,9 +5,9 @@ A parser for Apache Tika 1.12 that performs NER using CoreNLP, OpenNLP, NLTK, an
 1. Install the Python NLTK REST server ```http://wiki.apache.org/tika/TikaAndNLTK```
 2. Install the grobid-quantities REST server ```https://github.com/kermitt2/grobid-quantities```
 3. Install Apache OpenNLP and CoreNLP 	```https://wiki.apache.org/tika/TikaAndNER```
-4. Copy CoreNLPNERecogniser.java to ```PATH-TO-TIKA-1.12/tika-parsers/src/.../ner/corenlp/corenlpnerecogniser.java```
-5. Copy OpenNLPNameFinder.java to ```PATH-TO-TIKA-1.12/tika-parsers/src/.../ner/opennlp/OpenNLPNameFinder.java```
-6. Copy QuantityRestService.java to ```PATH-TO-GROBID/grobid-quantities/src/.../service/QuantityRestService.java```
+4. Copy CoreNLPNERecogniser.java to ```PATH-TO-TIKA-1.12/tika-parsers/src/.../ner/corenlp/```
+5. Copy OpenNLPNameFinder.java and the *.bin files to ```PATH-TO-TIKA-1.12/tika-parsers/src/.../ner/opennlp/```
+6. Copy QuantityRestService.java to ```PATH-TO-GROBID/grobid-quantities/src/.../service/```
 7. Recompile grobid-quantities
 8. Copy CompositeNERAgreementParser.java to ```PATH-TO-TIKA-1.12/tika-parsers/src/.../ner/```
 9. Recompile Tika to use the updated NER parsers
